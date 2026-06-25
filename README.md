@@ -71,9 +71,10 @@ The Adjunct Dean walks into the classroom. Class begins.
 
 ## Customization
 
-Not teaching Consumer Behavior? Edit `SKILL.md`:
-- Replace the **knowledge map** (Section 6) with your subject
-- Replace the **persona** with your field
+This workflow is **subject-agnostic**. The AI builds a knowledge map dynamically from whatever source material you provide (PDF, textbook, slides, etc.) — no pre-loaded content to swap out.
+
+If you want to personalize the teaching persona:
+- Edit the **persona** section in `SKILL.md` (Section 1) — change Prof. Chen's name, field, or personality
 - The Socratic rhythm and interaction pattern are universal — no changes needed
 
 ## Dependencies (optional)
@@ -173,9 +174,10 @@ cp MIT私教授课工作流/.claude/skills/mit-teaching.md .claude/skills/
 
 ## 自定义
 
-教的不是消费者行为学？编辑 `SKILL.md`：
-- 替换**知识地图**（第六章）为你教的科目
-- 替换**角色设定**为你的领域
+本工作流**不限定学科**。AI 会从你提供的任何源材料（PDF、教材、幻灯片等）中动态构建知识地图，无需预置内容。
+
+如果想个性化教学角色：
+- 编辑 `SKILL.md` 里的**角色设定**（第一节）——把 Prof. Chen 的名字、领域改成你自己的
 - 教学节奏和互动模式是通用框架，不用改
 
 ## 依赖（可选）
@@ -189,7 +191,7 @@ pip install python-docx PyMuPDF pdfplumber
 
 | 文件 | 用途 |
 |------|------|
-| `SKILL.md` | 核心大脑：角色设定、教学规范、14章知识地图 |
+| `SKILL.md` | 核心大脑：角色设定、教学规范、动态知识提取流程 |
 | `笔记模板.html` | 课后笔记的 HTML 骨架模板 |
 | `build_word.py` | PDF → 结构化 Word 梳理文档 |
 | `.claude/skills/mit-teaching.md` | Skill 注册文件 |

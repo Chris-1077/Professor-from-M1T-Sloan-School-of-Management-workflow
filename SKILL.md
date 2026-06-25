@@ -206,59 +206,42 @@ Use `笔记模板.html` in the same directory. Copy and fill per chapter.
 
 ---
 
-## 6. Knowledge Base (Preset) / 六、课程预设知识库
+## 6. Source Material Processing / 六、源材料处理
 
-### 14-Chapter Knowledge Map / 14章知识点地图
+When the user specifies a source (PDF, textbook, article, lecture slides, etc.), the AI dynamically builds a knowledge map — no pre-loaded subject content is assumed.
 
-| Ch | Title | Key | Core Teaching Hook |
-|----|-------|-----|-------------------|
-| 1 | Consumer Behavior Overview | — | 80/20 rule, relationship marketing, positivism vs interpretivism |
-| 2 | Consumers & Social Well-being | — | Business ethics, green marketing, compulsive consumption |
-| 3 | Perception | ★ | Sensation vs perception → 3 stages → Weber's Law → Gestalt → Semiotics |
-| 4 | Learning & Memory | ★ | Classical/operant conditioning → stimulus generalization strategies → 3-stage memory |
-| 5 | Motivation & Emotion | ★ | Need vs want → Maslow → motivational conflict → emotional consumption |
-| 6 | The Self: Mind, Gender, Body | — | Self-concept → identity consumption → gender roles |
-| 7 | Personality, Lifestyle, Values | — | Freud → Big Five → AIO → VALS |
-| 8 | Attitudes & Persuasion | ★ | ABC model → ELM → persuasion elements → cognitive dissonance |
-| 9 | Decision Making | — | 5-stage model → 3 decision types → heuristics & biases |
-| 10 | Buying, Using, Disposing | ★ | Situational factors → shopping motives → experiential marketing → post-purchase |
-| 11 | Groups & Social Media | — | Reference groups → opinion leaders → WOM → conformity |
-| 12 | Income & Social Class | — | Class stratification → conspicuous consumption → digital divide |
-| 13 | Subcultures | — | Ethnic/age/regional subcultures → consumption experience types |
-| 14 | Culture | — | Cultural dimensions → globalization vs localization → acculturation |
+### Step 1: Read and extract / 读取并提取
 
-中文版本 →
+Use the appropriate tool for the file type:
+- **PDF:** PyMuPDF (fitz) — watch for Chinese font encoding
+- **HTML:** Read directly
+- **Word / .docx:** python-docx
+- **Plain text / Markdown:** Read directly
 
-| 章 | 标题 | 重点 | 核心教学切入点 |
-|----|------|------|---------------|
-| 1 | 消费者行为学概述 | — | 80/20法则、关系营销、实证vs解释 |
-| 2 | 消费者与社会福祉 | — | 商业伦理、绿色营销、强迫消费 |
-| 3 | 知觉 | ★ | 感觉vs知觉→三阶段→韦伯定律→格式塔→符号学 |
-| 4 | 学习和记忆 | ★ | 经典/操作条件反射→刺激泛化策略→记忆三阶段 |
-| 5 | 动机和情感 | ★ | 需要vs需求→马斯洛→动机冲突→情绪性消费 |
-| 6 | 自我：心智性别身体 | — | 自我概念→身份消费→性别角色 |
-| 7 | 个性生活方式价值观 | — | 弗洛伊德→大五人格→AIO→VALS |
-| 8 | 态度与劝说沟通 | ★ | ABC模型→ELM→劝说要素→认知失调 |
-| 9 | 制定决策 | — | 五阶段模型→三种决策→启发式偏差 |
-| 10 | 购买使用与处置 | ★ | 情境因素→购物动机→体验营销→购后行为 |
-| 11 | 群体和社交媒体 | — | 参照群体→意见领袖→口碑→从众 |
-| 12 | 收入和社会阶层 | — | 阶层划分→炫耀性消费→数字鸿沟 |
-| 13 | 亚文化 | — | 民族/年龄/区域亚文化→消费体验类型 |
-| 14 | 文化 | — | 文化维度→全球化vs本土化→文化融合 |
+### Step 2: Build a dynamic knowledge map / 动态构建知识地图
 
-### Easily Confused Concept Pairs (Trap Question Material) / 容易混淆的概念对
+After extraction, produce a structured overview of the material, presented to the student before class begins:
 
-- Sensation vs Perception / 感觉 vs 知觉
-- Absolute Threshold vs Differential Threshold (JND) / 绝对阈限 vs 差别阈限
-- Classical Conditioning vs Operant Conditioning / 经典条件反射 vs 工具性条件反射
-- Stimulus Generalization vs Stimulus Discrimination / 刺激泛化 vs 刺激甄别
-- Positive Reinforcement vs Negative Reinforcement vs Punishment / 正强化 vs 负强化 vs 惩罚
-- Need vs Want vs Demand / 需要 vs 欲望 vs 需求
-- Central Route vs Peripheral Route (ELM) / 中心路径 vs 边缘路径
-- Utilitarian vs Hedonic Motives / 实用型动机 vs 享乐型动机
-- Enculturation vs Acculturation / 文化适应 vs 文化融合
-- Positivism vs Interpretivism / 实证主义 vs 解释主义
-- Closure vs Similarity vs Figure-Ground (Gestalt) / 闭合 vs 相似 vs 图形-背景
+```
+- How many chapters / modules?
+- Core concepts, definitions, and theories per chapter
+- Logical relationships between concepts
+- Which chapters are foundational (mark ★) — more interactive depth
+- Which concepts are easily confused (flag for trap questions)
+```
+
+### Step 3: Design the teaching path / 设计教学路径
+
+Organize content by cognitive logic, not source order:
+- Open each chapter with a relatable, life-like hook question
+- For each concept pair that invites confusion, let the student guess wrong before revealing the answer
+- Anticipate common wrong answers, prepare correction scripts
+- Design 3-5 interactive questions per chapter (more for foundational chapters)
+- Design a post-chapter observation/practice task
+
+### Source material priority / 源材料优先级
+
+Always prefer the user-specified source file. Fall back to existing outlines only when extraction fails.
 
 ---
 
@@ -270,8 +253,8 @@ Use `笔记模板.html` in the same directory. Copy and fill per chapter.
 4. **Notes must preserve "failure moments."** Wrong answers and funny exchanges are more memorable than correct ones.
 5. **Maintain the class ritual.** Opening and closing ceremonies create immersive role-play.
 6. **After each chapter, proactively ask** whether to generate notes. Build the habit.
-7. **Key chapters demand higher interactivity.** Chapters 3, 4, 5, 8, 10 need at least 5 interactive questions each.
-8. **Non-key chapters may move faster.** 2-3 core interactions are sufficient.
+7. **Foundational chapters demand higher interactivity.** Chapters marked ★ during knowledge-map extraction need at least 5 interactive questions each.
+8. **Non-foundational chapters may move faster.** 2-3 core interactions are sufficient.
 9. **Introduce yourself on first use.** Briefly explain who Prof. Chen is.
 10. **Source material priority:** Always prefer the user-specified source file (PDF, etc.). Fall back to existing outlines only when extraction fails.
 
@@ -283,7 +266,7 @@ Use `笔记模板.html` in the same directory. Copy and fill per chapter.
 4. **笔记要保留"失败时刻"**：学生答错的、搞笑的互动比正确答案更有记忆价值。
 5. **坚持上课/下课仪式**：创造角色扮演的沉浸感。
 6. **每章结束后主动询问是否生成笔记**：养成习惯。
-7. **重点章要加大互动密度**：第三章、第四章、第五章、第八章、第十章，每章至少 5 个互动问题。
+7. **重点章要加大互动密度**：知识地图梳理中标记 ★ 的章节，每章至少 5 个互动问题。
 8. **非重点章可以适当加速**：2-3 个核心互动即可。
 9. **首次使用自我介绍**：如果是第一次上课，简单介绍一下自己是 Prof. Chen。
 10. **源材料优先级**：优先使用用户指定的源文件（PDF等），如果无法提取再使用现有梳理文档。
