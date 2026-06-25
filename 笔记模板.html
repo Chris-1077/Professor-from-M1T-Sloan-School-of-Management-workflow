@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>{{CHAPTER_TITLE}} · 课堂笔记</title>
+<style>
+  :root {
+    --ink: #2c3e50;
+    --red: #c0392b;
+    --blue: #1a568e;
+    --light-blue: #e8f0f8;
+    --warm: #fdf6ec;
+    --gray: #7f8c8d;
+    --line: #d5d8dc;
+    --paper: #fcfcf9;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: "Microsoft YaHei","微软雅黑",sans-serif;
+    background: #e8e4df;
+    color: var(--ink);
+    line-height: 1.9;
+    padding: 40px 20px;
+  }
+  .notebook {
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--paper);
+    box-shadow: 0 2px 20px rgba(0,0,0,.15), 0 0 0 1px rgba(0,0,0,.04);
+    border-radius: 4px;
+    position: relative;
+    background-image: linear-gradient(to right, transparent 58px, #e8d5d5 58px, #e8d5d5 60px, transparent 60px);
+  }
+  .notebook-inner { padding: 50px 60px 50px 80px; }
+
+  .note-header { border-bottom: 3px double var(--ink); padding-bottom: 20px; margin-bottom: 30px; }
+  .note-header .course { font-size: 13px; color: var(--gray); letter-spacing: 2px; }
+  .note-header h1 { font-size: 28px; margin: 8px 0; color: var(--ink); font-weight: 900; letter-spacing: 2px; }
+  .note-header .meta { font-size: 12px; color: var(--gray); display: flex; gap: 30px; flex-wrap: wrap; }
+  .star-chapter { display: inline-block; background: var(--red); color: #fff; font-size: 11px; padding: 2px 10px; border-radius: 3px; margin-left: 10px; vertical-align: middle; letter-spacing: 1px; }
+
+  .section { margin: 30px 0; }
+  .section h2 { font-size: 18px; color: var(--blue); border-left: 4px solid var(--blue); padding-left: 14px; margin-bottom: 14px; font-weight: 700; }
+  .section h3 { font-size: 15px; color: var(--ink); margin: 18px 0 8px; font-weight: 700; }
+
+  .concept-box { background: var(--warm); border-left: 4px solid #e67e22; padding: 14px 18px; margin: 14px 0; border-radius: 0 6px 6px 0; font-size: 14px; }
+  .concept-box .cn { font-weight: 700; color: #e67e22; font-size: 12px; letter-spacing: 1px; }
+  .concept-box .en { font-size: 12px; color: var(--gray); font-style: italic; margin-left: 6px; }
+
+  .def-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+  .def-card { background: #fff; border: 1.5px solid var(--line); border-radius: 8px; padding: 16px 18px; font-size: 13.5px; border-top: 3px solid #3498db; }
+  .def-card .label { font-weight: 700; font-size: 11px; color: var(--blue); letter-spacing: 1px; margin-bottom: 6px; }
+
+  .flow-diagram { background: var(--light-blue); border-radius: 10px; padding: 24px 20px; margin: 18px 0; text-align: center; }
+  .flow-steps { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+  .flow-step { background: #fff; border: 2px solid var(--blue); border-radius: 10px; padding: 14px 18px; min-width: 90px; font-weight: 700; font-size: 14px; color: var(--blue); box-shadow: 0 2px 6px rgba(0,0,0,.06); }
+  .flow-step .num { display: block; font-size: 11px; color: var(--gray); font-weight: 400; }
+  .flow-arrow { font-size: 22px; color: var(--blue); font-weight: 700; }
+  .flow-sub { font-size: 12px; color: var(--gray); margin-top: 14px; text-align: center; }
+  .flow-sub span { display: inline-block; background: #fff; padding: 2px 10px; border-radius: 10px; margin: 4px 4px; font-size: 11px; }
+
+  .dialogue { background: #fff; border: 1px solid var(--line); border-radius: 8px; margin: 14px 0; overflow: hidden; }
+  .dialogue .qa { padding: 10px 18px; font-size: 13px; display: flex; gap: 12px; align-items: flex-start; }
+  .dialogue .qa.q { background: #fafafa; border-bottom: 1px solid #f0f0f0; }
+  .dialogue .qa .role { font-weight: 700; font-size: 11px; min-width: 44px; padding-top: 1px; letter-spacing: 1px; }
+  .dialogue .qa.q .role { color: var(--blue); }
+  .dialogue .qa.a .role { color: var(--red); }
+  .dialogue .qa .text { flex: 1; }
+
+  .insight { background: #fff9e6; border: 1.5px solid #f0d060; border-radius: 8px; padding: 14px 18px 14px 36px; margin: 14px 0; font-size: 14px; position: relative; }
+  .insight::before { content: "💡"; position: absolute; top: -12px; left: 16px; font-size: 18px; }
+
+  ul.kp { list-style: none; padding: 0; }
+  ul.kp li { padding: 6px 0 6px 18px; position: relative; font-size: 13.5px; }
+  ul.kp li::before { content: "▸"; color: var(--blue); position: absolute; left: 0; }
+
+  .mini-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+  .mini-table th { background: var(--blue); color: #fff; padding: 10px 14px; text-align: left; font-size: 12px; letter-spacing: 1px; }
+  .mini-table td { padding: 9px 14px; border-bottom: 1px solid var(--line); }
+  .mini-table tr:nth-child(even) td { background: #fafbfc; }
+
+  .note-footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--gray); text-align: center; line-height: 2; }
+  .divider { text-align: center; color: var(--line); font-size: 18px; letter-spacing: 8px; margin: 28px 0; }
+
+  @media (max-width: 700px) {
+    .notebook-inner { padding: 30px 20px 30px 30px; }
+    .notebook { background-image: none; }
+    .def-pair { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="notebook">
+<div class="notebook-inner">
+
+<!-- ========== HEADER ========== -->
+<div class="note-header">
+  <div class="course">14443 消费者行为学 · MIT Sloan 特级教师班</div>
+  <h1>{{CHAPTER_NUM}} {{CHAPTER_TITLE}} {{STAR_BADGE}}</h1>
+  <div class="meta">
+    <span>日期：{{DATE}}</span>
+    <span>课时：{{HOURS}}</span>
+    <span>教授：Prof. Chen</span>
+  </div>
+</div>
+
+<!-- ========== CONTENT SECTIONS ========== -->
+<!--
+  章节内容按以下块组合：
+
+  1. 课前引入 → .section > .dialogue (Q&A 对话)
+  2. 核心概念区分 → .section > .def-pair (两张卡片)
+  3. 关键概念 → .concept-box
+  4. 流程图 → .flow-diagram
+  5. 知识点列表 → .mini-table
+  6. 课堂互动 → .dialogue > .qa.q / .qa.a
+  7. 重要洞察 → .insight
+  8. 课后作业 → .section > .concept-box
+  9. 章节总结 → .flow-diagram (ASCII 图)
+  10. 分隔线 → .divider
+-->
+
+<!-- ========== FOOTER ========== -->
+<div class="note-footer">
+  <p>14443 消费者行为学 · {{CHAPTER_NUM}} {{CHAPTER_TITLE}} · 课堂笔记</p>
+  <p>MIT Sloan 特级教师班 · Prof. Chen · {{DATE}}</p>
+  <p style="margin-top:8px;font-size:10px;">笔记已自动保存至 📁 six book\学习笔记\</p>
+</div>
+
+</div><!-- .notebook-inner -->
+</div><!-- .notebook -->
+
+</body>
+</html>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>第三章 知觉 · 课堂笔记</title>
+<style>
+  :root {
+    --ink: #2c3e50;
+    --red: #c0392b;
+    --blue: #1a568e;
+    --light-blue: #e8f0f8;
+    --warm: #fdf6ec;
+    --gray: #7f8c8d;
+    --line: #d5d8dc;
+    --paper: #fcfcf9;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: "Microsoft YaHei","微软雅黑",sans-serif;
+    background: #e8e4df;
+    color: var(--ink);
+    line-height: 1.9;
+    padding: 40px 20px;
+  }
+  .notebook {
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--paper);
+    box-shadow: 0 2px 20px rgba(0,0,0,.15), 0 0 0 1px rgba(0,0,0,.04);
+    border-radius: 4px;
+    position: relative;
+    /* Red margin line */
+    background-image: linear-gradient(to right, transparent 58px, #e8d5d5 58px, #e8d5d5 60px, transparent 60px);
+  }
+  .notebook-inner {
+    padding: 50px 60px 50px 80px;
+  }
+
+  /* Header */
+  .note-header {
+    border-bottom: 3px double var(--ink);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+  }
+  .note-header .course {
+    font-size: 13px;
+    color: var(--gray);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .note-header h1 {
+    font-size: 28px;
+    margin: 8px 0;
+    color: var(--ink);
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+  .note-header .meta {
+    font-size: 12px;
+    color: var(--gray);
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  .note-header .meta span { white-space: nowrap; }
+  .star-chapter {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 3px;
+    margin-left: 10px;
+    vertical-align: middle;
+    letter-spacing: 1px;
+  }
+
+  /* Section */
+  .section {
+    margin: 30px 0;
+  }
+  .section h2 {
+    font-size: 18px;
+    color: var(--blue);
+    border-left: 4px solid var(--blue);
+    padding-left: 14px;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  .section h3 {
+    font-size: 15px;
+    color: var(--ink);
+    margin: 18px 0 8px;
+    font-weight: 700;
+  }
+
+  /* Key concept box */
+  .concept-box {
+    background: var(--warm);
+    border-left: 4px solid #e67e22;
+    padding: 14px 18px;
+    margin: 14px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+  }
+  .concept-box .cn {
+    font-weight: 700;
+    color: #e67e22;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .concept-box .en {
+    font-size: 12px;
+    color: var(--gray);
+    font-style: italic;
+    margin-left: 6px;
+  }
+
+  /* Definition pair */
+  .def-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 14px 0;
+  }
+  .def-card {
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    padding: 16px 18px;
+    font-size: 13.5px;
+  }
+  .def-card .label {
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--blue);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .def-card.sensation { border-top: 3px solid #3498db; }
+  .def-card.perception { border-top: 3px solid #e74c3c; }
+
+  /* Flow diagram */
+  .flow-diagram {
+    background: var(--light-blue);
+    border-radius: 10px;
+    padding: 24px 20px;
+    margin: 18px 0;
+    text-align: center;
+  }
+  .flow-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    background: #fff;
+    border: 2px solid var(--blue);
+    border-radius: 10px;
+    padding: 14px 18px;
+    min-width: 90px;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--blue);
+    box-shadow: 0 2px 6px rgba(0,0,0,.06);
+  }
+  .flow-step .num {
+    display: block;
+    font-size: 11px;
+    color: var(--gray);
+    font-weight: 400;
+  }
+  .flow-arrow {
+    font-size: 22px;
+    color: var(--blue);
+    font-weight: 700;
+  }
+  .flow-sub {
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: 14px;
+    text-align: center;
+  }
+  .flow-sub span {
+    display: inline-block;
+    background: #fff;
+    padding: 2px 10px;
+    border-radius: 10px;
+    margin: 4px 4px;
+    font-size: 11px;
+  }
+
+  /* Dialogue / Q&A */
+  .dialogue {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    margin: 14px 0;
+    overflow: hidden;
+  }
+  .dialogue .qa {
+    padding: 10px 18px;
+    font-size: 13px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .dialogue .qa.q {
+    background: #fafafa;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .dialogue .qa .role {
+    font-weight: 700;
+    font-size: 11px;
+    min-width: 44px;
+    padding-top: 1px;
+    letter-spacing: 1px;
+  }
+  .dialogue .qa.q .role { color: var(--blue); }
+  .dialogue .qa.a .role { color: var(--red); }
+  .dialogue .qa .text { flex: 1; }
+
+  /* Key insight */
+  .insight {
+    background: #fff9e6;
+    border: 1.5px solid #f0d060;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 14px;
+    position: relative;
+  }
+  .insight::before {
+    content: "💡";
+    position: absolute;
+    top: -12px;
+    left: 16px;
+    font-size: 18px;
+  }
+  .insight p { margin-top: 4px; }
+
+  /* List */
+  ul.kp {
+    list-style: none;
+    padding: 0;
+  }
+  ul.kp li {
+    padding: 6px 0 6px 18px;
+    position: relative;
+    font-size: 13.5px;
+  }
+  ul.kp li::before {
+    content: "▸";
+    color: var(--blue);
+    position: absolute;
+    left: 0;
+  }
+
+  /* Margin notes */
+  .margin-note {
+    float: right;
+    width: 140px;
+    margin: 6px -20px 6px 16px;
+    font-size: 11px;
+    color: var(--gray);
+    font-style: italic;
+    border-left: 2px solid #e8d5d5;
+    padding: 6px 0 6px 10px;
+    line-height: 1.6;
+  }
+
+  /* Table */
+  .mini-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 13px;
+  }
+  .mini-table th {
+    background: var(--blue);
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .mini-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .mini-table tr:nth-child(even) td { background: #fafbfc; }
+
+  /* Footer */
+  .note-footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--gray);
+    text-align: center;
+    line-height: 2;
+  }
+
+  /* Divider */
+  .divider {
+    text-align: center;
+    color: var(--line);
+    font-size: 18px;
+    letter-spacing: 8px;
+    margin: 28px 0;
+  }
+
+  @media (max-width: 700px) {
+    .notebook-inner { padding: 30px 20px 30px 30px; }
+    .notebook { background-image: none; }
+    .def-pair { grid-template-columns: 1fr; }
+    .margin-note { float: none; width: auto; margin: 8px 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="notebook">
+<div class="notebook-inner">
+
+<!-- ==================== HEADER ==================== -->
+<div class="note-header">
+  <div class="course">14443 消费者行为学 · MIT Sloan 特级教师班</div>
+  <h1>第三章 知觉 <span class="star-chapter">★ 重点章</span></h1>
+  <div class="meta">
+    <span>日期：2026.06.25</span>
+    <span>课时：2 课时（80 min）</span>
+    <span>教授：Prof. Chen</span>
+  </div>
+</div>
+
+<!-- ==================== 课前引入 ==================== -->
+<div class="section">
+  <h2>0. 课前引入</h2>
+  <div class="dialogue">
+    <div class="qa q">
+      <div class="role">陈教授</div>
+      <div class="text">你现在坐在这儿，眼睛、耳朵、鼻子、皮肤，一直在接收信息。这些"原始信号"专业上叫什么？A. 感觉&emsp;B. 知觉</div>
+    </div>
+    <div class="qa a">
+      <div class="role">我</div>
+      <div class="text">B</div>
+    </div>
+    <div class="qa q">
+      <div class="role">陈教授</div>
+      <div class="text">错。大部分同学第一次都答错。你选的是<strong>第二步</strong>。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 核心区别 ==================== -->
+<div class="section">
+  <h2>1. 感觉 vs 知觉：核心区别</h2>
+
+  <div class="def-pair">
+    <div class="def-card sensation">
+      <div class="label">感觉 Sensation</div>
+      <p>眼耳鼻舌身对光线、声音、气味、质地等基本刺激的<strong>直接反应</strong>。纯物理过程，未加工。</p>
+      <p style="margin-top:8px;font-size:12px;color:var(--gray);">例：耳朵接收到声波振动</p>
+    </div>
+    <div class="def-card perception">
+      <div class="label">知觉 Perception</div>
+      <p>大脑对这些感觉进行<strong>选择、组织和解释</strong>的过程。赋予意义。</p>
+      <p style="margin-top:8px;font-size:12px;color:var(--gray);">例：判断出"这是笔尖划过纸面的声音，有人在记笔记"</p>
+    </div>
+  </div>
+
+  <div class="insight">
+    <p><strong>一句话记住：</strong>感觉 = 雷达接收信号；知觉 = 大脑解读信号，赋予意义。</p>
+  </div>
+</div>
+
+<div class="divider">· · ·</div>
+
+<!-- ==================== 三阶段模型 ==================== -->
+<div class="section">
+  <h2>2. 知觉的三个阶段</h2>
+
+  <div class="flow-diagram">
+    <div class="flow-steps">
+      <div class="flow-step"><span class="num">Stage 1</span>暴露<br>Exposure</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span class="num">Stage 2</span>注意<br>Attention</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span class="num">Stage 3</span>解释<br>Interpretation</div>
+    </div>
+    <div class="flow-sub">
+      <span>刺激进入感官范围</span> →
+      <span>大脑分配资源处理</span> →
+      <span>赋予刺激物意义</span>
+    </div>
+  </div>
+
+  <p style="font-size:13px;color:var(--gray);margin-top:8px;">
+    类比：大脑像一个<strong>安检口</strong>。每天数万条信息想通过，你大脑处理不了这么多，进化给了你三道关卡层层过滤。
+  </p>
+</div>
+
+<!-- ==================== 暴露 ==================== -->
+<div class="section">
+  <h2>3. 第一关：暴露（Exposure）</h2>
+
+  <p>刺激进入个人感觉器官的接收范围之内，就发生了<strong>暴露</strong>。但——<strong>不是所有进入感官范围的刺激都能被意识到。</strong>需要跨过一道"门槛"。</p>
+
+  <div class="concept-box">
+    <span class="cn">核心概念</span>
+    <strong>感觉阈限（Sensory Threshold）</strong>
+    <span class="en">— 临界点，超过它刺激才足以被意识到</span>
+  </div>
+
+  <!-- 绝对 vs 差别 -->
+  <div class="def-pair">
+    <div class="def-card" style="border-top:3px solid #2c3e50;">
+      <div class="label" style="color:#2c3e50;">绝对阈限 Absolute Threshold</div>
+      <p>特定感觉渠道所能觉察到的<strong>最小刺激量</strong>。</p>
+      <p style="margin-top:6px;font-size:12px;color:var(--gray);">问："灯亮了吗？"——亮到你刚好能看见的那个点</p>
+    </div>
+    <div class="def-card" style="border-top:3px solid #8e44ad;">
+      <div class="label" style="color:#8e44ad;">差别阈限 Differential Threshold</div>
+      <p>感觉系统觉察两种刺激之间<strong>差别或变化</strong>的能力。也叫<strong>最小可觉察差别（JND）</strong>。</p>
+      <p style="margin-top:6px;font-size:12px;color:var(--gray);">问："灯变亮了吗？"——亮到你能发现"变了"的那个点</p>
+    </div>
+  </div>
+
+  <!-- 韦伯定律 -->
+  <div class="concept-box" style="border-left-color:#c0392b;">
+    <span class="cn" style="color:#c0392b;">★ 必考</span>
+    <strong>韦伯定律（Weber's Law）</strong>
+    <p style="margin-top:4px;">引起注意所需要的刺激变化量，与初始刺激强度有关。初始刺激越强，引起注意所需要的变化量就越大。</p>
+  </div>
+
+  <div class="dialogue">
+    <div class="qa q">
+      <div class="role">陈教授</div>
+      <div class="text">咖啡涨5块你炸了，车涨5万你没感觉——为什么？</div>
+    </div>
+    <div class="qa a">
+      <div class="role">我</div>
+      <div class="text">大脑在乎<strong>比例</strong>，不在乎绝对值。咖啡5→10是100%涨幅；车50→55万只有10%。</div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <p><strong>营销启示：</strong>想涨价？小步慢走，别跨过消费者的差别阈限。想打折？一步到位，直接跨过去，让消费者"哇"出来。</p>
+  </div>
+</div>
+
+<div class="divider">· · ·</div>
+
+<!-- ==================== 注意 ==================== -->
+<div class="section">
+  <h2>4. 第二关：注意（Attention）</h2>
+
+  <div class="concept-box">
+    <span class="cn">定义</span>
+    <strong>注意</strong>：对特定刺激进行信息加工的<strong>投入程度</strong>。大脑处理能力有限，必须筛选。
+  </div>
+
+  <p>专业术语：<strong>认知选择（Perceptual Selection）</strong>——人们只注意所接触刺激的一小部分。这是一种"心理经济"，不这样大脑会宕机。</p>
+
+  <p style="margin-top:12px;">筛选机制有两股力量：<strong>个人因素</strong>和<strong>刺激物因素</strong>。</p>
+
+  <h3>4.1 个人因素（来自你自己）</h3>
+
+  <table class="mini-table">
+    <tr>
+      <th style="width:20%;">机制</th>
+      <th style="width:35%;">含义</th>
+      <th style="width:45%;">课堂例子</th>
+    </tr>
+    <tr>
+      <td><strong>知觉警惕</strong><br><span style="font-size:11px;color:var(--gray);">Perceptual Vigilance</span></td>
+      <td>更可能意识到与<strong>当前需要</strong>有关的刺激</td>
+      <td>饿了的时候，满大街都是餐厅招牌。平时根本不注意的，今天全跳进眼里</td>
+    </tr>
+    <tr>
+      <td><strong>知觉防御</strong><br><span style="font-size:11px;color:var(--gray);">Perceptual Defense</span></td>
+      <td>倾向于看不见<strong>不想看</strong>的东西；若刺激构成威胁，可能不理会或改变其意义</td>
+      <td>老烟民对烟盒上"吸烟有害健康"六个大字，买了一百次之后基本视而不见</td>
+    </tr>
+    <tr>
+      <td><strong>适应</strong><br><span style="font-size:11px;color:var(--gray);">Adaptation</span></td>
+      <td>对刺激过于熟悉而<strong>不再注意</strong></td>
+      <td>穿了一上午的袜子，早就不觉得了。广告播一百遍，你也不看了</td>
+    </tr>
+  </table>
+
+  <h3>导致适应的四个因素 <span style="font-size:12px;color:var(--red);">（多选题常考）</span></h3>
+  <table class="mini-table">
+    <tr><th>因素</th><th>说明</th></tr>
+    <tr><td><strong>强度</strong></td><td>低强度刺激容易适应（轻声细语 vs 一声巨雷）</td></tr>
+    <tr><td><strong>甄别</strong></td><td>简单刺激容易适应（纯色背景 vs 复杂图案）</td></tr>
+    <tr><td><strong>暴露频率</strong></td><td>频繁接触容易适应（天天刷到同一个广告）</td></tr>
+    <tr><td><strong>关联性</strong></td><td>无关/不重要的刺激容易适应</td></tr>
+  </table>
+
+  <h3>4.2 刺激物因素（来自刺激本身）</h3>
+  <p>与周围刺激形成<strong>对比</strong>的更容易引起注意。对比产生方式：<strong>大小、颜色、位置、新颖性</strong>。</p>
+
+  <div class="dialogue">
+    <div class="qa q">
+      <div class="role">陈教授</div>
+      <div class="text">你刷手机，划走了多少广告？停下的那几个，是什么抓住了你？</div>
+    </div>
+    <div class="qa a">
+      <div class="role">我</div>
+      <div class="text">三类：①从来没见过的好吃好玩的东西 → <strong>新颖性</strong>；②离谱抽象出其不意的 → <strong>对比效应</strong>；③正好能解决当前需求的 → <strong>知觉警惕</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider">· · ·</div>
+
+<!-- ==================== 解释 ==================== -->
+<div class="section">
+  <h2>5. 第三关：解释（Interpretation）</h2>
+
+  <div class="concept-box">
+    <span class="cn">定义</span>
+    <strong>解释</strong>：人们赋予感觉刺激物的<strong>意义</strong>。消费者赋予刺激物的意义取决于<strong>心理图式（Schema）</strong>——你大脑里已有的信念集合。
+  </div>
+
+  <h3>5.1 格式塔心理学：刺激物组织方式三原则 <span style="font-size:12px;color:var(--red);">（简答题必背）</span></h3>
+
+  <table class="mini-table">
+    <tr><th style="width:22%;">原则</th><th style="width:38%;">含义</th><th style="width:40%;">课堂互动</th></tr>
+    <tr>
+      <td><strong>闭合原则</strong><br><span style="font-size:11px;color:var(--gray);">Closure</span></td>
+      <td>倾向于把<strong>不完整的图形</strong>感知为完整的</td>
+      <td>陈教授画了个缺口的圆——我说"被拿走一块的披萨"<br>→ 被调侃"格式塔听了能从坟里爬出来"</td>
+    </tr>
+    <tr>
+      <td><strong>相似原则</strong><br><span style="font-size:11px;color:var(--gray);">Similarity</span></td>
+      <td>倾向于将<strong>物理特性相似</strong>的物品归为一类</td>
+      <td>同一个品牌不同产品，包装长得像——你隔老远就知道是一家的</td>
+    </tr>
+    <tr>
+      <td><strong>图形-背景原则</strong><br><span style="font-size:11px;color:var(--gray);">Figure-Ground</span></td>
+      <td>一部分是主角（图形），其余是背景</td>
+      <td>看电影，主角在人群里，路人全模糊。主角=图形，路人=背景<br>→ 我答："主角光环"</td>
+    </tr>
+  </table>
+
+  <h3>5.2 符号学（Semiotics）<span style="font-size:12px;color:var(--red);">（考试重点）</span></h3>
+
+  <p>研究标志和象征之间的联系，以及它们在赋予意义中的作用。</p>
+
+  <table class="mini-table">
+    <tr><th style="width:20%;">要素</th><th style="width:30%;">含义</th><th style="width:50%;">万宝路案例</th></tr>
+    <tr>
+      <td><strong>目标客体</strong></td>
+      <td>广告语所指向的产品</td>
+      <td>万宝路香烟</td>
+    </tr>
+    <tr>
+      <td><strong>标志（形象）</strong></td>
+      <td>传达意欲含义的感官形象</td>
+      <td>牛仔——骑马、荒野、抽烟</td>
+    </tr>
+    <tr>
+      <td><strong>诠释（含义）</strong></td>
+      <td>消费者引申的含义</td>
+      <td>粗犷、自由、男子气概——"帅"</td>
+    </tr>
+  </table>
+
+  <div class="insight">
+    <p><strong>关键洞察：</strong>你买万宝路，买的不是尼古丁——<strong>你买的是那个牛仔。</strong></p>
+  </div>
+
+  <h3>5.3 知觉定位（Perceptual Positioning）</h3>
+  <p>消费者评价产品是根据产品"<strong>意味着什么</strong>"，而不是产品"能做什么"。这种感知意义构成了产品的<strong>市场定位</strong>。</p>
+  <p style="margin-top:6px;">营销者建立品牌定位的<strong>八个维度</strong>：</p>
+  <ul class="kp">
+    <li>生活方式 &nbsp;|&nbsp; 价格领先 &nbsp;|&nbsp; 属性 &nbsp;|&nbsp; 产品类别 &nbsp;|&nbsp; 竞争者 &nbsp;|&nbsp; 场合 &nbsp;|&nbsp; 使用者 &nbsp;|&nbsp; 质量</li>
+  </ul>
+</div>
+
+<div class="divider">· · ·</div>
+
+<!-- ==================== 课堂总结 ==================== -->
+<div class="section">
+  <h2>6. 本章总结</h2>
+
+  <div class="flow-diagram" style="text-align:left;">
+    <p style="font-weight:700;font-size:15px;margin-bottom:12px;text-align:center;">一图胜千言</p>
+    <pre style="font-family:'Microsoft YaHei',sans-serif;font-size:13px;line-height:2.2;text-align:center;color:var(--ink);">
+  外界刺激
+     │
+     ▼
+┌─────────────┐
+│  暴  露     │  ← 刺激进入感官范围
+│  Exposure   │    关键：绝对阈限、差别阈限、韦伯定律
+└──────┬──────┘
+       │ 跨过阈限
+       ▼
+┌─────────────┐
+│  注  意     │  ← 大脑分配资源，认知选择
+│  Attention  │    个人因素：警惕 / 防御 / 适应（4因素）
+└──────┬──────┘    刺激物：大小、颜色、位置、新颖性
+       │ 被选中
+       ▼
+┌─────────────┐
+│  解  释     │  ← 赋予意义
+│Interpretation│    格式塔三原则 + 符号学三要素 + 知觉定位
+└──────┬──────┘
+       │
+       ▼
+   消费者的"现实"
+（不是客观世界，而是大脑编的故事）
+    </pre>
+  </div>
+
+  <div class="insight" style="margin-top:20px;">
+    <p><strong>本章核心结论：</strong>消费者不是照相机——他们不会客观记录这个世界。他们<strong>选择性暴露、选择性注意、选择性解释</strong>。营销者在每一个环节上，都要确保自家产品不被过滤掉。</p>
+  </div>
+</div>
+
+<!-- ==================== 课后作业 ==================== -->
+<div class="section">
+  <h2>7. 课后作业</h2>
+  <div class="concept-box" style="border-left-color:var(--blue);">
+    <p>刷手机的时候，留意你划走了多少广告，停下了几个。停下的那几个，是<strong>个人因素</strong>（你需要它？）还是<strong>刺激物因素</strong>（它够特别？）抓住了你？</p>
+  </div>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<div class="note-footer">
+  <p>14443 消费者行为学 · 第三章 知觉 · 课堂笔记</p>
+  <p>MIT Sloan 特级教师班 · Prof. Chen · 2026.06.25</p>
+  <p style="margin-top:8px;font-size:10px;">笔记已自动保存至 📁 six book\学习笔记\</p>
+</div>
+
+</div><!-- .notebook-inner -->
+</div><!-- .notebook -->
+
+</body>
+</html>
