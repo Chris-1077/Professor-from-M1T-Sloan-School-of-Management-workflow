@@ -1,3 +1,105 @@
+# MIT Private Teaching Workflow
+
+> **"好学近乎知，力行近乎仁，知耻近乎勇乎"** — *The Doctrine of the Mean*
+
+Turn Claude Code into an MIT Sloan Adjunct Dean who teaches you one-on-one using the Socratic method.
+
+## What Is This
+
+A complete three-stage learning workflow built for Claude Code:
+
+```
+📖 Pre-class Prep       🎓 Interactive Class       📝 Post-class Notes
+  Source material  →    Role-play teaching    →    HTML notebook
+  (PDF/Word)            (MIT Dean Socratic)        (classroom transcript style)
+```
+
+## Demo
+
+| Traditional Study | This Workflow |
+|-------------------|---------------|
+| Read alone, forget fast | Adjunct Dean challenges you with Socratic questioning — you answer before he explains |
+| No idea what's important | Key chapters marked ★, tricky concepts turned into trap questions |
+| Notes = copy-paste | Notes = classroom transcript, preserving your wrong answers and funny moments |
+
+[View example notes →](./示例笔记.html)
+
+## Quick Start
+
+### 1. Copy the folder
+
+Copy the entire folder into your project root:
+
+```
+your-project/
+├── MIT私教授课工作流/          ← Copy this folder
+│   ├── SKILL.md
+│   ├── 笔记模板.html
+│   ├── build_word.py
+│   ├── .claude/skills/
+│   │   └── mit-teaching.md
+│   └── ...
+```
+
+### 2. Register the Skill
+
+Copy `.claude/skills/mit-teaching.md` into your project's `.claude/skills/`.
+
+If the directory doesn't exist yet:
+```bash
+mkdir -p .claude/skills
+cp MIT私教授课工作流/.claude/skills/mit-teaching.md .claude/skills/
+```
+
+### 3. Speak the Passphrase
+
+In Claude Code, type:
+
+> **好学近乎知，力行近乎仁，知耻近乎勇乎**
+
+The Adjunct Dean walks into the classroom. Class begins.
+
+## Commands
+
+| You say | What happens |
+|---------|-------------|
+| `好学近乎知，力行近乎仁，知耻近乎勇乎` | Activate the Dean, enter class |
+| `教我第四章` / "Teach me Chapter 4" | Start teaching from that chapter |
+| `继续讲` / `老师好` | Resume class |
+| `帮我整理笔记` / "Generate notes" | Generate an HTML notebook for the current chapter |
+| `下课` / "Class dismissed" | Pause class, keep the role |
+
+## Customization
+
+Not teaching Consumer Behavior? Edit `SKILL.md`:
+- Replace the **knowledge map** (Section 6) with your subject
+- Replace the **persona** with your field
+- The Socratic rhythm and interaction pattern are universal — no changes needed
+
+## Dependencies (optional)
+
+Only needed for the Word document extraction feature:
+```bash
+pip install python-docx PyMuPDF pdfplumber
+```
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `SKILL.md` | The brain: persona, teaching protocol, knowledge map |
+| `笔记模板.html` | HTML notebook template |
+| `build_word.py` | PDF → structured Word document |
+| `.claude/skills/mit-teaching.md` | Skill registration |
+| `示例笔记.html` | Full example: Chapter 3 class notes |
+| `分享指南.md` | Installation guide for colleagues |
+
+## License
+
+MIT License — take it, modify it, share it.
+
+---
+
 # MIT 私教授课工作流
 
 > **"好学近乎知，力行近乎仁，知耻近乎勇乎"** —《中庸》
