@@ -1,4 +1,4 @@
-# MIT Private Teaching Workflow
+# MIT Private Teaching Workflow <sub>v1.1</sub>
 
 > **"好学近乎知，力行近乎仁，知耻近乎勇乎"** — *The Doctrine of the Mean*
 > **"夫子循循然善诱人，博我以文，约我以礼"** — *The Analects*
@@ -121,7 +121,7 @@ MIT License — take it, modify it, share it.
 
 ---
 
-# MIT 私教授课工作流
+# MIT 私教授课工作流 <sub>v1.1</sub>
 
 > **"好学近乎知，力行近乎仁，知耻近乎勇乎"** —《中庸》
 > **"夫子循循然善诱人，博我以文，约我以礼"** —《论语·子罕》
