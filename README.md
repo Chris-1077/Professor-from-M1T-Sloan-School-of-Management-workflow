@@ -1,8 +1,9 @@
 # MIT Private Teaching Workflow
 
 > **"好学近乎知，力行近乎仁，知耻近乎勇乎"** — *The Doctrine of the Mean*
+> **"夫子循循然善诱人，博我以文，约我以礼"** — *The Analects*
 
-Turn Claude Code into an MIT Sloan Adjunct Dean who teaches you one-on-one using the Socratic method.
+Turn Claude Code into an MIT Sloan Adjunct Dean who teaches you one-on-one using the Socratic method. **Two teaching modes, one professor.**
 
 ## What Is This
 
@@ -13,6 +14,18 @@ A complete three-stage learning workflow built for Claude Code:
   Source material  →    Role-play teaching    →    HTML notebook
   (PDF/Word)            (MIT Dean Socratic)        (classroom transcript style)
 ```
+
+### Two Modes for Different Learning Goals
+
+| | Basic Mode (基础) | Advanced Mode (进阶·精讲深研) |
+|---|---|---|
+| **Passphrase** | 好学近乎知，力行近乎仁，知耻近乎勇乎 | 夫子循循然善诱人，博我以文，约我以礼 |
+| **Style** | Survey Course — broad, fast, hit the highlights | Graduate Seminar — every knowledge block taught to mastery |
+| **Interaction** | 2-5 Socratic Q&A per chapter | ~3x density: Teach → Student Summarize → Professor Evaluate & Correct |
+| **Student role** | Answer questions, reason through concepts | Reconstruct knowledge in your own words after every block |
+| **Best for** | Quick overviews, non-critical chapters, first pass | Deep mastery, foundational material, exam prep |
+
+Switch between modes anytime — say either passphrase, or "切换到基础模式" / "切换到进阶模式".
 
 ## Demo
 
@@ -51,19 +64,26 @@ mkdir -p .claude/skills
 cp MIT私教授课工作流/.claude/skills/mit-teaching.md .claude/skills/
 ```
 
-### 3. Speak the Passphrase
+### 3. Speak a Passphrase
 
-In Claude Code, type:
+In Claude Code, type either:
 
 > **好学近乎知，力行近乎仁，知耻近乎勇乎**
 
-The Adjunct Dean walks into the classroom. Class begins.
+for quick survey mode, or:
+
+> **夫子循循然善诱人，博我以文，约我以礼**
+
+for deep immersion mode. The Adjunct Dean walks into the classroom. Class begins.
 
 ## Commands
 
 | You say | What happens |
 |---------|-------------|
-| `好学近乎知，力行近乎仁，知耻近乎勇乎` | Activate the Dean, enter class |
+| `好学近乎知，力行近乎仁，知耻近乎勇乎` | Activate basic mode |
+| `夫子循循然善诱人，博我以文，约我以礼` | Activate advanced deep-immersion mode |
+| `切换到基础模式` | Switch from advanced to basic, keep current progress |
+| `切换到进阶模式` | Switch from basic to advanced, dive deeper from current block |
 | `教我第四章` / "Teach me Chapter 4" | Start teaching from that chapter |
 | `继续讲` / `老师好` | Resume class |
 | `帮我整理笔记` / "Generate notes" | Generate an HTML notebook for the current chapter |
@@ -88,7 +108,7 @@ pip install python-docx PyMuPDF pdfplumber
 
 | File | Purpose |
 |------|---------|
-| `SKILL.md` | The brain: persona, teaching protocol, knowledge map |
+| `SKILL.md` | The brain: persona, teaching protocol, knowledge map, dual-mode spec |
 | `笔记模板.html` | HTML notebook template |
 | `build_word.py` | PDF → structured Word document |
 | `.claude/skills/mit-teaching.md` | Skill registration |
@@ -104,8 +124,9 @@ MIT License — take it, modify it, share it.
 # MIT 私教授课工作流
 
 > **"好学近乎知，力行近乎仁，知耻近乎勇乎"** —《中庸》
+> **"夫子循循然善诱人，博我以文，约我以礼"** —《论语·子罕》
 
-让 Claude Code 化身为 MIT 斯隆编外院长，用苏格拉底追问法进行一对一互动教学。
+让 Claude Code 化身为 MIT 斯隆编外院长，用苏格拉底追问法进行一对一互动教学。**双暗号，双模式，同一个教授。**
 
 ## 这是什么
 
@@ -116,6 +137,18 @@ MIT License — take it, modify it, share it.
   源材料      →     角色扮演       →     HTML 笔记本
   (PDF/Word)       (MIT 院长追问)        (课堂实录风格)
 ```
+
+### 两种模式，按需选择
+
+| | 基础模式 | 进阶模式·精讲深研 |
+|---|---|---|
+| **暗号** | 好学近乎知，力行近乎仁，知耻近乎勇乎 | 夫子循循然善诱人，博我以文，约我以礼 |
+| **定位** | 导论课——快速建立框架认知 | 研究生研讨课——每个知识块讲到彻底掌握 |
+| **互动密度** | 每章 2-5 轮苏格拉底追问 | 约 3 倍：讲授 → 学生用自己的话梳理 → 教授四维评判修正 |
+| **学生角色** | 回答提问，推理思考 | 每小节自己重构知识脉络，接受教授严格评审 |
+| **适用场景** | 快速概览、非重点章节、初次扫读 | 深度掌握、重点章节、备考复习 |
+
+两种模式可随时切换——说出对应暗号即可，或直接说"切换到基础模式"/"切换到进阶模式"。
 
 ## 演示效果
 
@@ -160,13 +193,20 @@ cp MIT私教授课工作流/.claude/skills/mit-teaching.md .claude/skills/
 
 > **好学近乎知，力行近乎仁，知耻近乎勇乎**
 
-编外院长走进教室。开始上课。
+进入基础导览模式。或者：
+
+> **夫子循循然善诱人，博我以文，约我以礼**
+
+进入精讲深研模式。编外院长走进教室。开始上课。
 
 ## 可用指令
 
 | 你说 | 发生什么 |
 |------|---------|
-| `好学近乎知，力行近乎仁，知耻近乎勇乎` | 激活院长，进入课堂 |
+| `好学近乎知，力行近乎仁，知耻近乎勇乎` | 激活基础模式 |
+| `夫子循循然善诱人，博我以文，约我以礼` | 激活进阶精讲深研模式 |
+| `切换到基础模式` | 从进阶切回基础，保持当前进度 |
+| `切换到进阶模式` | 从基础切入进阶，从当前知识块开始深度教学 |
 | `教我第四章` | 从该章节开始授课 |
 | `继续讲` / `老师好` | 继续上课 |
 | `帮我整理笔记` | 生成当前章节的 HTML 课堂笔记 |
@@ -191,7 +231,7 @@ pip install python-docx PyMuPDF pdfplumber
 
 | 文件 | 用途 |
 |------|------|
-| `SKILL.md` | 核心大脑：角色设定、教学规范、动态知识提取流程 |
+| `SKILL.md` | 核心大脑：角色设定、教学规范、动态知识提取流程、双模式规范 |
 | `笔记模板.html` | 课后笔记的 HTML 骨架模板 |
 | `build_word.py` | PDF → 结构化 Word 梳理文档 |
 | `.claude/skills/mit-teaching.md` | Skill 注册文件 |
